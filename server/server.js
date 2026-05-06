@@ -22,9 +22,15 @@ connectDB().then(() => {
 
 // Middleware
 app.use(cors({
-    origin: true,
-    credentials: true
+    origin: ["https://gharse-delta.vercel.app", "http://localhost:5173", "http://localhost:5000"],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept"]
 }));
+
+// Handle preflight requests for all routes
+app.options('*', cors());
+
 app.use(express.json());
 
 // Socket.io context
