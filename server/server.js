@@ -29,7 +29,6 @@ app.use(cors({
 }));
 
 // Handle preflight requests for all routes
-app.options('(.*)', cors());
 
 app.use(express.json());
 
@@ -47,7 +46,7 @@ app.use('/api/admin', require('./routes/adminRoutes'));
 // Socket.io connection
 io.on('connection', (socket) => {
     console.log('User connected:', socket.id);
-    
+
     socket.on('join_room', (userId) => {
         socket.join(userId);
         console.log(`User ${userId} joined room`);
